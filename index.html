@@ -20,6 +20,7 @@
     :root {
       --tipz-purple: #6C00FF;
       --tipz-orange: #FF6A00;
+      --tipz-green: #22C55E;
       --tipz-white: #FFFFFF;
       --tipz-deep: #0F0B2D;
       --tipz-deep-2: #09071D;
@@ -126,8 +127,8 @@
     .status-dot {
       width: 7px; height: 7px;
       border-radius: 50%;
-      background: var(--tipz-orange);
-      box-shadow: 0 0 0 4px rgba(255,106,0,.10), 0 0 16px rgba(255,106,0,.6);
+      background: var(--tipz-green);
+      box-shadow: 0 0 0 4px rgba(34,197,94,.10), 0 0 16px rgba(34,197,94,.6);
       animation: pulseDot 2.4s ease-in-out infinite;
     }
 
@@ -138,7 +139,7 @@
       grid-template-columns: 54% 46%;
       align-items: center;
       gap: clamp(28px, 5vw, 72px);
-      width: min(1180px, 100%);
+      width: min(1080px, 100%);
       margin: 0 auto;
       padding: clamp(8px, 2vh, 20px) 0;
     }
@@ -338,8 +339,8 @@
       50% { transform: translateY(-7px); }
     }
     @keyframes pulseDot {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(255,106,0,.10), 0 0 16px rgba(255,106,0,.6); opacity: 1; }
-      50% { box-shadow: 0 0 0 7px rgba(255,106,0,.04), 0 0 22px rgba(255,106,0,.8); opacity: .85; }
+      0%, 100% { box-shadow: 0 0 0 4px rgba(34,197,94,.10), 0 0 16px rgba(34,197,94,.6); opacity: 1; }
+      50% { box-shadow: 0 0 0 7px rgba(34,197,94,.04), 0 0 22px rgba(34,197,94,.8); opacity: .85; }
     }
 
     /* ---------- Responsive ---------- */
@@ -415,7 +416,7 @@
         </svg>
         <p class="eyebrow">PEOPLE <i>·</i> IDEAS <i>·</i> GROWTH</p>
         <h1>Less noise.<br>More clarity<span class="dot">.</span></h1>
-        <p class="subhead">You're in the right place. Tipz.co turns the noise around people, ideas, and growth into a clear signal you can act on — sharper thinking, faster decisions, real momentum. Tell us what you're after and we'll take it from there.</p>
+        <p class="subhead">New technology can overwhelm entrepreneurs. Tipz.co turns complex business decisions into a clear vision you can safely act on — more clarity, faster decisions, real growth. Tell us what you're after and we'll take it from there.</p>
       </div>
 
       <!-- Right: lead capture card -->
@@ -438,10 +439,10 @@
             <label for="interest">What's your interest?</label>
             <select class="input" id="interest" name="interest" required>
               <option value="" disabled selected>What's your interest?</option>
-              <option value="Explore Tipz.co services">Explore Tipz.co services</option>
-              <option value="Partnership">Partnership</option>
-              <option value="Investment">Investment</option>
-              <option value="Something else">Something else</option>
+              <option value="overwhelmed-by-technology">I'm overwhelmed by new technology and need clarity</option>
+              <option value="complex-business-decision">I need help making a complex business decision</option>
+              <option value="grow-faster-next-move">I want to grow faster but don't know my next move</option>
+              <option value="something-else">Something else</option>
             </select>
           </div>
 
