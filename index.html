@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0F0B2D">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Tipz.co — Less noise. More clarity. Join the early-access list to be first when we launch and get priority access to what we're building.">
-  <meta property="og:title" content="Tipz.co — Request early access">
-  <meta property="og:description" content="Less noise. More clarity. Join the early list to be first when we launch.">
+  <meta name="description" content="Tipz.co cuts through the noise so you can see the signal that moves things forward. Tell us what you're after and we'll take it from there.">
+  <meta property="og:title" content="Tipz.co — Less noise. More clarity.">
+  <meta property="og:description" content="Tipz.co cuts through the noise so you can see the signal that moves things forward. Tell us what you're after and we'll take it from there.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/og-tipz-coming-soon.png">
-  <title>Tipz.co — Request early access</title>
+  <title>Tipz.co — Less noise. More clarity.</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,20 +99,13 @@
     }
 
     /* ---------- Brand lockup ---------- */
-    .brand { display: inline-flex; align-items: center; gap: 11px; }
-    .brand-gem {
-      width: clamp(28px, 3vw, 34px);
-      height: clamp(28px, 3vw, 34px);
+    .brand { display: inline-flex; align-items: center; }
+    .brand img {
       display: block;
+      height: clamp(26px, 3.4vw, 34px);
+      width: auto;
       filter: drop-shadow(0 8px 20px rgba(108,0,255,.42));
     }
-    .wordmark {
-      font-size: clamp(19px, 2vw, 23px);
-      font-weight: 800;
-      letter-spacing: -.03em;
-      color: var(--tipz-white);
-    }
-    .wordmark .dot { color: var(--tipz-orange); }
 
     /* ---------- Status pill ---------- */
     .status {
@@ -204,10 +197,17 @@
     }
 
     .card-head {
-      margin: 0 0 clamp(14px, 1.8vh, 20px);
+      margin: 0 0 4px;
       font-size: clamp(15px, 1.2vw, 18px);
       font-weight: 700;
       letter-spacing: -.02em;
+    }
+    .card-sub {
+      margin: 0 0 clamp(14px, 1.8vh, 20px);
+      font-size: 12.5px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: rgba(255,255,255,.56);
     }
 
     .field { margin-bottom: clamp(10px, 1.4vh, 14px); }
@@ -393,20 +393,11 @@
     <!-- Header -->
     <header class="site-header">
       <a class="brand" href="/" aria-label="Tipz.co home">
-        <svg class="brand-gem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
-          <rect x="0" y="0" width="512" height="512" rx="112" fill="#6C00FF"/>
-          <g transform="translate(91 66) scale(1.27)">
-            <polygon fill="#FF6A00" points="130,8 55,78 205,78"/>
-            <polygon fill="#FFFFFF" points="14,116 55,86 78,98 116,212"/>
-            <polygon fill="#FFFFFF" points="78,98 182,98 130,212"/>
-            <polygon fill="#FFFFFF" points="182,98 205,86 246,116 144,212"/>
-          </g>
-        </svg>
-        <span class="wordmark">Tipz<span class="dot">.</span>co</span>
+        <img src="assets/logo-primary-dark-1600.png" alt="Tipz.co">
       </a>
-      <div class="status" aria-label="Coming soon">
+      <div class="status" aria-label="Now live">
         <span class="status-dot" aria-hidden="true"></span>
-        <span>COMING SOON</span>
+        <span>NOW LIVE</span>
       </div>
     </header>
 
@@ -415,7 +406,6 @@
       <!-- Left: brand story -->
       <div class="story">
         <svg class="story-gem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
-          <rect x="0" y="0" width="512" height="512" rx="112" fill="#6C00FF"/>
           <g transform="translate(91 66) scale(1.27)">
             <polygon fill="#FF6A00" points="130,8 55,78 205,78"/>
             <polygon fill="#FFFFFF" points="14,116 55,86 78,98 116,212"/>
@@ -425,13 +415,14 @@
         </svg>
         <p class="eyebrow">PEOPLE <i>·</i> IDEAS <i>·</i> GROWTH</p>
         <h1>Less noise.<br>More clarity<span class="dot">.</span></h1>
-        <p class="subhead">Tipz.co is building a sharper signal for what comes next. Join the early list to be first when we launch — and get priority access to what we're building.</p>
+        <p class="subhead">You're in the right place. Tipz.co turns the noise around people, ideas, and growth into a clear signal you can act on — sharper thinking, faster decisions, real momentum. Tell us what you're after and we'll take it from there.</p>
       </div>
 
       <!-- Right: lead capture card -->
       <div class="card">
         <form id="lead-form" novalidate>
-          <h2 class="card-head">Request early access</h2>
+          <h2 class="card-head">Start the conversation</h2>
+          <p class="card-sub">A couple details and we'll reach out.</p>
 
           <div class="field">
             <label for="name">Full name</label>
@@ -446,22 +437,21 @@
           <div class="field">
             <label for="interest">What's your interest?</label>
             <select class="input" id="interest" name="interest" required>
-              <option value="" disabled>Select one…</option>
-              <option value="Early access" selected>Early access</option>
+              <option value="" disabled selected>What's your interest?</option>
+              <option value="Explore Tipz.co services">Explore Tipz.co services</option>
               <option value="Partnership">Partnership</option>
               <option value="Investment">Investment</option>
               <option value="Something else">Something else</option>
             </select>
           </div>
 
-          <button class="submit" type="submit" id="submit-btn">Get early access →</button>
-          <p class="fineprint">No noise, no spam — just a note when it's ready.</p>
+          <button class="submit" type="submit" id="submit-btn">Get in touch →</button>
+          <p class="fineprint">No noise, no spam — we'll only reach out about what you asked for.</p>
           <p class="form-error" id="form-error" role="alert"></p>
         </form>
 
         <div class="success" id="success" role="status" aria-live="polite">
           <svg class="success-gem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
-            <rect x="0" y="0" width="512" height="512" rx="112" fill="#6C00FF"/>
             <g transform="translate(91 66) scale(1.27)">
               <polygon fill="#FF6A00" points="130,8 55,78 205,78"/>
               <polygon fill="#FFFFFF" points="14,116 55,86 78,98 116,212"/>
@@ -469,8 +459,8 @@
               <polygon fill="#FFFFFF" points="182,98 205,86 246,116 144,212"/>
             </g>
           </svg>
-          <h3>You're on the list.</h3>
-          <p>We'll be in touch at <b id="success-email">your email</b>.</p>
+          <h3>Thanks — you're in.</h3>
+          <p>We'll be in touch shortly.</p>
         </div>
       </div>
     </main>
@@ -510,12 +500,12 @@
           btn.textContent = "Sending…";
           btn.disabled = true;
         } else {
-          btn.textContent = btn.dataset.label || "Get early access →";
+          btn.textContent = btn.dataset.label || "Get in touch →";
           btn.disabled = false;
         }
       }
       function showSuccess(email) {
-        successEmail.textContent = email;
+        if (successEmail) successEmail.textContent = email;
         form.style.display = "none";
         successEl.classList.add("show");
       }
