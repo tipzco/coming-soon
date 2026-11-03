@@ -255,6 +255,25 @@
     }
     select.input option { background: #0b0821; color: #fff; }
 
+    /* Conditional clarification field (revealed on "Something else") */
+    .clarify-field {
+      margin-bottom: 0;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: max-height .26s ease, opacity .2s ease, transform .26s ease, margin-bottom .26s ease;
+    }
+    .clarify-field.show {
+      margin-bottom: clamp(10px, 1.4vh, 14px);
+      max-height: 110px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .clarify-field { transition: none; }
+    }
+
     .submit {
       width: 100%;
       margin-top: clamp(6px, 1vh, 10px);
@@ -365,7 +384,10 @@
     @media (max-width: 480px) {
       .shell { padding-left: 18px; padding-right: 18px; }
       .status { padding: 7px 10px; font-size: 9.5px; letter-spacing: .14em; }
-      .card { padding: 18px 18px; }
+      .card { padding: 14px 18px; }
+      .field { margin-bottom: 8px; }
+      .card-sub { margin-bottom: 11px; }
+      .clarify-field.show { margin-bottom: 8px; max-height: 94px; }
       .footer-note { display: none; }
     }
 
@@ -446,6 +468,11 @@
             </select>
           </div>
 
+          <div class="field clarify-field" id="clarify-field">
+            <label for="interest-detail">Tell us a bit more</label>
+            <input class="input" type="text" id="interest-detail" name="interest_detail" placeholder="Tell us a bit more" autocomplete="off">
+          </div>
+
           <button class="submit" type="submit" id="submit-btn">Get in touch →</button>
           <p class="fineprint">No noise, no spam — we'll only reach out about what you asked for.</p>
           <p class="form-error" id="form-error" role="alert"></p>
@@ -484,6 +511,19 @@
       const successEl = document.getElementById("success");
       const emailInput = document.getElementById("email");
       const successEmail = document.getElementById("success-email");
+      const interestSelect = document.getElementById("interest");
+      const clarifyField = document.getElementById("clarify-field");
+      const clarifyInput = document.getElementById("interest-detail");
+
+      // Reveal the free-text clarification only when "Something else" is chosen.
+      interestSelect.addEventListener("change", function () {
+        if (interestSelect.value === "something-else") {
+          clarifyField.classList.add("show");
+        } else {
+          clarifyField.classList.remove("show");
+          clarifyInput.value = "";
+        }
+      });
 
       const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -525,7 +565,8 @@
         const payload = {
           name: (form.name && form.name.value || "").trim(),
           email: email,
-          interest: form.interest.value
+          interest: form.interest.value,
+          interest_detail: clarifyInput.value.trim()
         };
 
         setLoading(true);
