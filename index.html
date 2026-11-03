@@ -5,15 +5,383 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0F0B2D">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Tipz.co — Less noise. More Clarity. Coming soon.">
-  <meta property="og:title" content="Tipz.co — Coming Soon">
-  <meta property="og:description" content="Less noise. More Direction.">
+  <meta name="description" content="Tipz.co — Less noise. More clarity. Join the early-access list to be first when we launch and get priority access to what we're building.">
+  <meta property="og:title" content="Tipz.co — Request early access">
+  <meta property="og:description" content="Less noise. More clarity. Join the early list to be first when we launch.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/og-tipz-coming-soon.png">
-  <title>Tipz.co — Coming Soon</title>
+  <title>Tipz.co — Request early access</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --tipz-purple: #6C00FF;
+      --tipz-orange: #FF6A00;
+      --tipz-white: #FFFFFF;
+      --tipz-deep: #0F0B2D;
+      --tipz-deep-2: #09071D;
+      --tipz-muted: rgba(255,255,255,.62);
+      --tipz-line: rgba(255,255,255,.09);
+      --font: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; margin: 0; }
+    html { background: var(--tipz-deep-2); }
+
+    body {
+      height: 100svh;
+      overflow: hidden;
+      color: var(--tipz-white);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(108,0,255,.12), transparent 36%),
+        linear-gradient(155deg, #10092f 0%, #0b0821 52%, #080617 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ---------- Ambient decoration ---------- */
+    .ambient {
+      position: fixed;
+      z-index: 0;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+    }
+    .ambient-a {
+      width: 40vw; height: 40vw;
+      left: -14vw; top: -8vh;
+      background: rgba(108,0,255,.22);
+    }
+    .ambient-b {
+      width: 32vw; height: 32vw;
+      right: -12vw; bottom: -10vh;
+      background: rgba(255,106,0,.10);
+    }
+    .grid {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; opacity: .22;
+      background-image:
+        linear-gradient(rgba(255,255,255,.027) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.027) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
+      -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
+    }
+    .grain {
+      position: fixed; inset: 0; z-index: 1;
+      pointer-events: none; opacity: .03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+
+    /* ---------- Shell ---------- */
+    .shell {
+      position: relative;
+      z-index: 2;
+      height: 100svh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: clamp(16px, 3vh, 34px) clamp(20px, 5vw, 76px) clamp(14px, 2.4vh, 30px);
+    }
+
+    .site-header,
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* ---------- Brand lockup ---------- */
+    .brand { display: inline-flex; align-items: center; gap: 11px; }
+    .brand-gem {
+      width: clamp(28px, 3vw, 34px);
+      height: clamp(28px, 3vw, 34px);
+      display: block;
+      filter: drop-shadow(0 8px 20px rgba(108,0,255,.42));
+    }
+    .wordmark {
+      font-size: clamp(19px, 2vw, 23px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: var(--tipz-white);
+    }
+    .wordmark .dot { color: var(--tipz-orange); }
+
+    /* ---------- Status pill ---------- */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      color: rgba(255,255,255,.74);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .17em;
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--tipz-orange);
+      box-shadow: 0 0 0 4px rgba(255,106,0,.10), 0 0 16px rgba(255,106,0,.6);
+      animation: pulseDot 2.4s ease-in-out infinite;
+    }
+
+    /* ---------- Main grid ---------- */
+    .hero {
+      align-self: center;
+      display: grid;
+      grid-template-columns: 54% 46%;
+      align-items: center;
+      gap: clamp(28px, 5vw, 72px);
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: clamp(8px, 2vh, 20px) 0;
+    }
+
+    /* ---------- Left: brand story ---------- */
+    .eyebrow {
+      margin: 0 0 clamp(14px, 2vh, 20px);
+      color: rgba(255,255,255,.5);
+      font-size: clamp(10px, .82vw, 12px);
+      font-weight: 700;
+      letter-spacing: .26em;
+    }
+    .eyebrow i { color: var(--tipz-orange); font-style: normal; padding: 0 .35em; }
+
+    .story-gem {
+      width: clamp(44px, 5vw, 58px);
+      height: clamp(44px, 5vw, 58px);
+      display: block;
+      margin: 0 0 clamp(16px, 2.4vh, 24px);
+      filter: drop-shadow(0 16px 34px rgba(108,0,255,.34));
+      animation: float 5.5s ease-in-out infinite;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(40px, 5.4vw, 82px);
+      line-height: .92;
+      letter-spacing: -.045em;
+      font-weight: 800;
+      text-wrap: balance;
+    }
+    h1 .dot {
+      color: var(--tipz-orange);
+      text-shadow: 0 0 28px rgba(255,106,0,.26);
+    }
+
+    .subhead {
+      margin: clamp(16px, 2.4vh, 26px) 0 0;
+      max-width: 36ch;
+      color: var(--tipz-muted);
+      font-size: clamp(13px, 1.15vw, 16px);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: -.004em;
+    }
+
+    /* ---------- Right: lead capture card ---------- */
+    .card {
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 30px 70px -28px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.06);
+      padding: clamp(20px, 2.6vh, 30px) clamp(20px, 2vw, 30px);
+    }
+
+    .card-head {
+      margin: 0 0 clamp(14px, 1.8vh, 20px);
+      font-size: clamp(15px, 1.2vw, 18px);
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+
+    .field { margin-bottom: clamp(10px, 1.4vh, 14px); }
+    .field label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: rgba(255,255,255,.58);
+      text-transform: uppercase;
+    }
+
+    .input {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 11px;
+      background: rgba(8,6,23,.55);
+      color: var(--tipz-white);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.2;
+      transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .input::placeholder { color: rgba(255,255,255,.34); }
+    .input:hover { border-color: rgba(255,255,255,.2); }
+    .input:focus {
+      outline: none;
+      border-color: var(--tipz-orange);
+      box-shadow: 0 0 0 3px rgba(255,106,0,.22);
+      background: rgba(8,6,23,.72);
+    }
+
+    select.input {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%23FF6A00' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      padding-right: 34px;
+    }
+    select.input option { background: #0b0821; color: #fff; }
+
+    .submit {
+      width: 100%;
+      margin-top: clamp(6px, 1vh, 10px);
+      padding: 13px 16px;
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #fff;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      background: linear-gradient(135deg, #FF7D1F 0%, #FF6A00 52%, #F25600 100%);
+      box-shadow: 0 14px 30px -10px rgba(255,106,0,.6), inset 0 1px 0 rgba(255,255,255,.28);
+      transition: transform .14s ease, box-shadow .16s ease, filter .16s ease, opacity .16s ease;
+    }
+    .submit:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .submit:active { transform: translateY(0); }
+    .submit:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,106,0,.3), 0 14px 30px -10px rgba(255,106,0,.6); }
+    .submit:disabled { opacity: .7; cursor: default; transform: none; }
+
+    .fineprint {
+      margin: clamp(9px, 1.4vh, 13px) 0 0;
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255,255,255,.44);
+      letter-spacing: .01em;
+    }
+
+    .form-error {
+      display: none;
+      margin: 10px 0 0;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,106,0,.4);
+      border-radius: 10px;
+      background: rgba(255,106,0,.08);
+      color: #ffd9bf;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .form-error.show { display: block; }
+
+    /* ---------- Success state ---------- */
+    .success {
+      display: none;
+      text-align: center;
+      padding: clamp(6px, 2vh, 18px) 4px;
+    }
+    .success.show { display: block; }
+    .success-gem {
+      width: 52px; height: 52px;
+      margin: 0 auto clamp(12px, 1.8vh, 18px);
+      display: block;
+      filter: drop-shadow(0 12px 26px rgba(255,106,0,.4));
+    }
+    .success h3 {
+      margin: 0 0 8px;
+      font-size: clamp(18px, 1.5vw, 22px);
+      font-weight: 800;
+      letter-spacing: -.025em;
+    }
+    .success p {
+      margin: 0 auto;
+      max-width: 30ch;
+      color: var(--tipz-muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .success p b { color: rgba(255,255,255,.88); font-weight: 600; word-break: break-word; }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      color: rgba(255,255,255,.42);
+      font-size: 11px;
+      letter-spacing: .04em;
+    }
+    .footer-note { color: rgba(255,255,255,.3); }
+
+    /* ---------- Animations ---------- */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+    @keyframes pulseDot {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(255,106,0,.10), 0 0 16px rgba(255,106,0,.6); opacity: 1; }
+      50% { box-shadow: 0 0 0 7px rgba(255,106,0,.04), 0 0 22px rgba(255,106,0,.8); opacity: .85; }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: clamp(18px, 3vh, 28px);
+        text-align: left;
+        max-width: 460px;
+      }
+      .story-gem { display: none; }
+      .eyebrow { margin-bottom: 12px; }
+      h1 { font-size: clamp(34px, 10vw, 52px); }
+      .subhead { margin-top: 12px; max-width: none; font-size: 14px; }
+    }
+
+    @media (max-width: 860px) and (max-height: 760px) {
+      .subhead { display: none; }
+      .eyebrow { margin-bottom: 8px; }
+    }
+
+    @media (max-width: 480px) {
+      .shell { padding-left: 18px; padding-right: 18px; }
+      .status { padding: 7px 10px; font-size: 9.5px; letter-spacing: .14em; }
+      .card { padding: 18px 18px; }
+      .footer-note { display: none; }
+    }
+
+    /* Short desktop/laptop viewports */
+    @media (min-width: 861px) and (max-height: 740px) {
+      .story-gem { width: 44px; height: 44px; margin-bottom: 14px; }
+      h1 { font-size: clamp(38px, 5vw, 60px); }
+      .subhead { margin-top: 14px; }
+      .card { padding: 20px 24px; }
+      .field { margin-bottom: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .story-gem, .status-dot { animation: none; }
+      .submit { transition: none; }
+    }
+  </style>
 </head>
 <body>
   <div class="ambient ambient-a" aria-hidden="true"></div>
@@ -22,9 +390,19 @@
   <div class="grain" aria-hidden="true"></div>
 
   <div class="shell">
+    <!-- Header -->
     <header class="site-header">
       <a class="brand" href="/" aria-label="Tipz.co home">
-        <img src="assets/logo-primary-dark-1600.png" alt="Tipz.co">
+        <svg class="brand-gem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+          <rect x="0" y="0" width="512" height="512" rx="112" fill="#6C00FF"/>
+          <g transform="translate(91 66) scale(1.27)">
+            <polygon fill="#FF6A00" points="130,8 55,78 205,78"/>
+            <polygon fill="#FFFFFF" points="14,116 55,86 78,98 116,212"/>
+            <polygon fill="#FFFFFF" points="78,98 182,98 130,212"/>
+            <polygon fill="#FFFFFF" points="182,98 205,86 246,116 144,212"/>
+          </g>
+        </svg>
+        <span class="wordmark">Tipz<span class="dot">.</span>co</span>
       </a>
       <div class="status" aria-label="Coming soon">
         <span class="status-dot" aria-hidden="true"></span>
@@ -32,23 +410,161 @@
       </div>
     </header>
 
+    <!-- Main -->
     <main class="hero">
-      <div class="signal-wrap" aria-hidden="true">
-        <div class="signal-ring signal-ring-a"></div>
-        <div class="signal-ring signal-ring-b"></div>
-        <img class="mark" src="assets/mark-dark-1024.png" alt="">
+      <!-- Left: brand story -->
+      <div class="story">
+        <svg class="story-gem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+          <rect x="0" y="0" width="512" height="512" rx="112" fill="#6C00FF"/>
+          <g transform="translate(91 66) scale(1.27)">
+            <polygon fill="#FF6A00" points="130,8 55,78 205,78"/>
+            <polygon fill="#FFFFFF" points="14,116 55,86 78,98 116,212"/>
+            <polygon fill="#FFFFFF" points="78,98 182,98 130,212"/>
+            <polygon fill="#FFFFFF" points="182,98 205,86 246,116 144,212"/>
+          </g>
+        </svg>
+        <p class="eyebrow">PEOPLE <i>·</i> IDEAS <i>·</i> GROWTH</p>
+        <h1>Less noise.<br>More clarity<span class="dot">.</span></h1>
+        <p class="subhead">Tipz.co is building a sharper signal for what comes next. Join the early list to be first when we launch — and get priority access to what we're building.</p>
       </div>
 
-      <p class="eyebrow">PEOPLE <i>•</i> IDEAS <i>•</i> GROWTH</p>
-      <h1>Something useful<br>is taking shape<span>.</span></h1>
-      <p class="subhead">Less noise. More Clarity.</p>
-      <p class="teaser">A sharper signal for what comes next.</p>
+      <!-- Right: lead capture card -->
+      <div class="card">
+        <form id="lead-form" novalidate>
+          <h2 class="card-head">Request early access</h2>
+
+          <div class="field">
+            <label for="name">Full name</label>
+            <input class="input" type="text" id="name" name="name" placeholder="Your name" autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input class="input" type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="interest">What's your interest?</label>
+            <select class="input" id="interest" name="interest" required>
+              <option value="" disabled>Select one…</option>
+              <option value="Early access" selected>Early access</option>
+              <option value="Partnership">Partnership</option>
+              <option value="Investment">Investment</option>
+              <option value="Something else">Something else</option>
+            </select>
+          </div>
+
+          <button class="submit" type="submit" id="submit-btn">Get early access →</button>
+          <p class="fineprint">No noise, no spam — just a note when it's ready.</p>
+          <p class="form-error" id="form-error" role="alert"></p>
+        </form>
+
+        <div class="success" id="success" role="status" aria-live="polite">
+          <svg class="success-gem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+            <rect x="0" y="0" width="512" height="512" rx="112" fill="#6C00FF"/>
+            <g transform="translate(91 66) scale(1.27)">
+              <polygon fill="#FF6A00" points="130,8 55,78 205,78"/>
+              <polygon fill="#FFFFFF" points="14,116 55,86 78,98 116,212"/>
+              <polygon fill="#FFFFFF" points="78,98 182,98 130,212"/>
+              <polygon fill="#FFFFFF" points="182,98 205,86 246,116 144,212"/>
+            </g>
+          </svg>
+          <h3>You're on the list.</h3>
+          <p>We'll be in touch at <b id="success-email">your email</b>.</p>
+        </div>
+      </div>
     </main>
 
+    <!-- Footer -->
     <footer class="site-footer">
       <span>© 2026 Tipz.co</span>
       <span class="footer-note">Built for better decisions.</span>
     </footer>
   </div>
+
+  <script>
+    // Paste your Formspree (or compatible) endpoint here to go live, e.g. https://formspree.io/f/xxxxxxxx
+    const FORM_ENDPOINT = "";
+
+    (function () {
+      const form = document.getElementById("lead-form");
+      const btn = document.getElementById("submit-btn");
+      const errorEl = document.getElementById("form-error");
+      const successEl = document.getElementById("success");
+      const emailInput = document.getElementById("email");
+      const successEmail = document.getElementById("success-email");
+
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      function showError(msg) {
+        errorEl.textContent = msg;
+        errorEl.classList.add("show");
+      }
+      function clearError() {
+        errorEl.textContent = "";
+        errorEl.classList.remove("show");
+      }
+      function setLoading(on) {
+        if (on) {
+          btn.dataset.label = btn.textContent;
+          btn.textContent = "Sending…";
+          btn.disabled = true;
+        } else {
+          btn.textContent = btn.dataset.label || "Get early access →";
+          btn.disabled = false;
+        }
+      }
+      function showSuccess(email) {
+        successEmail.textContent = email;
+        form.style.display = "none";
+        successEl.classList.add("show");
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        clearError();
+
+        const email = emailInput.value.trim();
+        if (!EMAIL_RE.test(email)) {
+          showError("Please enter a valid email address.");
+          emailInput.focus();
+          return;
+        }
+
+        const payload = {
+          name: (form.name && form.name.value || "").trim(),
+          email: email,
+          interest: form.interest.value
+        };
+
+        setLoading(true);
+
+        if (FORM_ENDPOINT && /^https?:\/\//i.test(FORM_ENDPOINT)) {
+          // Live mode — POST to Formspree-compatible endpoint
+          fetch(FORM_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(payload)
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error("Request failed");
+              showSuccess(email);
+            })
+            .catch(function () {
+              setLoading(false);
+              showError("Something went wrong. Please try again.");
+            });
+        } else {
+          // Demo / review mode — simulate success without a network request
+          setTimeout(function () {
+            showSuccess(email);
+          }, 700);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
